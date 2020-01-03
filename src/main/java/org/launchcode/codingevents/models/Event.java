@@ -1,8 +1,6 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -17,13 +15,26 @@ public class Event {
     @Size(max = 500, message = "Description is too long!")
     private String description;
 
+    @NotNull(message = "Please put a real location.")
+    @NotBlank(message = "Location is required.")
+    private String location;
+
+    @Size(min = 1, message = "You must have at least 1 attendee.")
+    private String numberAttendees;
+
+    @AssertTrue
+    private Boolean mustRegister;
+
     @NotBlank(message = "Email is required.")
     @Email(message = "Invalid email. Try again")
     private String contactEmail;
 
-    public Event(String name, String description, String contactEmail) {
+    public Event(String name, String description, String contactEmail, String location, String numberAttendees, Boolean mustRegister) {
         this.name = name;
         this.description = description;
+        this.location = location;
+        this.numberAttendees = numberAttendees;
+        this.mustRegister = mustRegister;
         this.contactEmail = contactEmail;
         this.id = nextId;
         nextId++;
@@ -48,6 +59,30 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getNumberAttendees() {
+        return numberAttendees;
+    }
+
+    public void setNumberAttendees(String numberAttendees) {
+        this.numberAttendees = numberAttendees;
+    }
+
+    public Boolean getMustRegister() {
+        return mustRegister;
+    }
+
+    public void setMustRegister(Boolean mustRegister) {
+        this.mustRegister = mustRegister;
     }
 
     public String getContactEmail() {
