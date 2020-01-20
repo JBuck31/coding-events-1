@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Created by Chris Bay
  */
-@Repository
+@Repository //tells springboot that it should create EventRepository instances and inject them where needed
 public interface EventRepository extends CrudRepository<Event, Integer> {
 }
